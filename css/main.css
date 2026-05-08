@@ -4019,3 +4019,40 @@ section .phone-pill,
   75%, 97%  { opacity: 1; }
   100%      { opacity: 0; }
 }
+
+/* ============================================================
+   FINAL: Why Choose Us = 2x2 grid on mobile (2 per row, 2 rows)
+   Resets all the previous carousel attempts.
+   ============================================================ */
+@media (max-width: 720px) {
+  #why .services-grid {
+    position: static !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  #why .services-grid > .service-card,
+  #why .services-grid > .service-card:nth-child(1),
+  #why .services-grid > .service-card:nth-child(2),
+  #why .services-grid > .service-card:nth-child(3),
+  #why .services-grid > .service-card:nth-child(4) {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    opacity: 1 !important;
+    animation: none !important;
+    box-sizing: border-box !important;
+    visibility: visible !important;
+  }
+}
