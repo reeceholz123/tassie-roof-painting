@@ -3792,3 +3792,126 @@ header .btn,
   padding: 14px 16px !important;
   min-height: 48px !important;
 }
+
+/* ============================================================
+   FINAL FIXES (verified against live HTML — Nov 2025)
+   1. Hide header "Get a Quote" on mobile
+   2. Force .phone-pill (Services + Areas Call Us) to 6px corners
+   3. Sticky CTA: desktop HIDDEN, mobile 50/50 black+brand-blue
+   ============================================================ */
+
+/* 1. HEADER "Get a Quote" button — hide on mobile */
+@media (max-width: 720px) {
+  .site-header .nav-cta .btn-primary,
+  .site-header .nav-cta button[data-open-quote],
+  header .nav-cta .btn-primary,
+  header .nav-cta button[data-open-quote],
+  .nav-cta .btn-primary,
+  .nav-cta button[data-open-quote] {
+    display: none !important;
+  }
+}
+
+/* 2. PHONE-PILL — used in Services CTA + Areas CTA.
+   Override the 999px pill rounding to match every other button. */
+.phone-pill,
+a.phone-pill,
+section .phone-pill,
+.areas-cta .phone-pill,
+.section-paper .phone-pill {
+  border-radius: 6px !important;
+  padding: 12px 26px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  min-height: 44px !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  white-space: nowrap !important;
+}
+
+/* 3a. STICKY CTA — HIDDEN on desktop, full stop */
+@media (min-width: 721px) {
+  .sticky-cta,
+  div.sticky-cta {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+/* 3b. STICKY CTA — MOBILE ONLY: 50/50 split, black left, brand-blue right, no borders */
+@media (max-width: 720px) {
+  .sticky-cta,
+  div.sticky-cta {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+    align-items: stretch !important;
+    visibility: visible !important;
+  }
+
+  .sticky-cta > a,
+  .sticky-cta > button,
+  .sticky-cta .btn,
+  .sticky-cta a.btn,
+  .sticky-cta button.btn,
+  .sticky-cta a[href^="tel"],
+  .sticky-cta button[data-open-quote] {
+    flex: 1 1 50% !important;
+    width: 50% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    border: none !important;
+    border-color: transparent !important;
+    border-radius: 6px !important;
+    padding: 14px 12px !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    text-decoration: none !important;
+    box-shadow: none !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    min-height: 50px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* LEFT button (Call Us) — solid black, white text + phone icon */
+  .sticky-cta a[href^="tel"],
+  .sticky-cta a.btn-outline-light,
+  .sticky-cta a.btn-outline-dark {
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+  .sticky-cta a[href^="tel"] svg,
+  .sticky-cta a.btn-outline-light svg {
+    fill: #ffffff !important;
+    width: 18px !important;
+    height: 18px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* RIGHT button (Get a Free Quote) — brand blue (var(--brand) = #092768), white text + arrow */
+  .sticky-cta button[data-open-quote],
+  .sticky-cta button.btn-primary {
+    background: var(--brand) !important;
+    color: #ffffff !important;
+  }
+  .sticky-cta button[data-open-quote] svg,
+  .sticky-cta button.btn-primary svg {
+    fill: #ffffff !important;
+    width: 18px !important;
+    height: 18px !important;
+    flex-shrink: 0 !important;
+  }
+}
