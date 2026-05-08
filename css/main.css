@@ -3382,3 +3382,20 @@ section[class*="section-"] {
     height: 36px !important;
   }
 }
+
+/* ================================================================
+   ROUND 5 — text closer to top, kill blur on bottom bar
+   ================================================================ */
+
+@media (min-width: 721px) {
+  body .hero-content {
+    padding-top: 24px !important;
+    margin-top: 0 !important;
+    justify-content: flex-start !important;
+  }
+  body .hero-bottom-bar {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
