@@ -3491,3 +3491,27 @@ input[type="submit"].btn,
     display: none !important;
   }
 }
+
+/* === ROUND 7 HERO FIX === desktop hero text top-anchored just below header bar */
+/* Diagnosis: a prior override set align-items:center on .hero, which vertically  */
+/* centred the text inside the 820px tall hero. Original codebase used            */
+/* align-items:flex-start with padding-top:100px to clear the header. This        */
+/* override restores that geometry.                                                */
+@media (min-width: 721px) {
+  .hero {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding-top: 100px !important;
+    padding-bottom: 80px !important;
+    min-height: 820px !important;
+  }
+  .hero-content {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    align-self: flex-start !important;
+    transform: none !important;
+    top: auto !important;
+    position: relative !important;
+  }
+}
