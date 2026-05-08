@@ -3515,3 +3515,139 @@ input[type="submit"].btn,
     position: relative !important;
   }
 }
+
+/* ============================================================
+   FINAL HERO TEXT POSITION OVERRIDE — desktop only
+   Anchors headline + paragraph to TOP of hero photo,
+   right under the header bar with 60px breathing room.
+   This rule is intentionally placed at the end of the file
+   with maximum specificity + !important to defeat every
+   prior override accumulated in Rounds 1-7.
+   ============================================================ */
+@media (min-width: 721px) {
+  section.hero,
+  section.hero[data-hero],
+  .hero {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding-top: 60px !important;
+    padding-bottom: 100px !important;
+    min-height: 820px !important;
+  }
+
+  section.hero .hero-content,
+  section.hero > .hero-content,
+  .hero-content[data-hero-content],
+  .hero-content {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    align-self: flex-start !important;
+    transform: none !important;
+    top: 0 !important;
+    position: relative !important;
+  }
+
+  .hero-content .hero-top,
+  .hero-content .hero-bottom {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}
+
+/* ============================================================
+   FINAL BUTTON UNIFORMITY OVERRIDE
+   - Removes white border from sticky mobile Call Us button
+   - Strips fixed-width rules from Round 6 (watch-cta, hero-bottom-bar)
+   - Forces every button to size to its own content with identical
+     padding (12px 26px) and border-radius (6px) so the text-to-edge
+     ratio is the same on every button regardless of text length.
+   ============================================================ */
+
+/* 1. Sticky mobile Call Us — kill the white border */
+.sticky-mobile-cta .btn-outline-light,
+.sticky-mobile-cta a.btn-outline-light,
+.sticky-mobile-cta a[href^="tel"],
+.sticky-mobile-cta .btn-outline-dark {
+  border: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 2. Strip ALL forced widths from earlier rounds — buttons size to content */
+.btn,
+button.btn,
+a.btn,
+input[type="submit"].btn,
+.cta-button,
+.watch-section .watch-cta .btn,
+.watch-cta .btn,
+.hero-bottom-bar .btn,
+.hero-ctas .btn,
+.areas .btn,
+.areas-cta .btn,
+section.areas .btn,
+.lead-popup .btn,
+.modal .btn,
+.quote-form button {
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  width: auto !important;
+}
+
+/* 3. Universal button geometry — same padding + radius everywhere */
+.btn,
+button.btn,
+a.btn,
+input[type="submit"].btn,
+.cta-button {
+  border-radius: 6px !important;
+  padding: 12px 26px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  line-height: 1.2 !important;
+  min-height: 44px !important;
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  border-width: 2px !important;
+  box-sizing: border-box !important;
+}
+
+/* 4. Sticky mobile CTA — buttons still split 50/50 across the bar
+   (this is a layout requirement, not a fixed-width forcing) */
+.sticky-mobile-cta .btn,
+.sticky-mobile-cta a.btn {
+  flex: 1 1 50% !important;
+  font-size: 0.78rem !important;
+  padding: 14px 14px !important;
+  letter-spacing: 0.04em !important;
+  border-radius: 0 !important;
+}
+
+/* 5. Watch CTA pair + Hero bottom bar — flex centered group, buttons size to content */
+.watch-cta,
+.watch-section .watch-cta {
+  display: flex !important;
+  gap: 14px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+}
+@media (min-width: 721px) {
+  .hero-bottom-bar {
+    display: flex !important;
+    gap: 14px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+  }
+}
