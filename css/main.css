@@ -33,7 +33,7 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   --line:       #E3DFD8;
   --brand:      #092768;
   --brand-deep: #051A48;
-  --accent:     #D49B3A;
+  --accent:     #1976D2;
   --white:      #FFFFFF;
 
   --section-py: 56px;
@@ -819,41 +819,6 @@ section { padding: var(--section-py) 0; }
 .service-card:hover .service-sticker {
   transform: rotate(-4deg) scale(1.05);
 }
-/* "Premium" variant — uses brand navy instead of accent ochre, sits left */
-.service-card .service-tag.service-tag-new {
-  background: var(--brand);
-  color: var(--white);
-  width: 70px;
-  height: 70px;
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-}
-
-/* --- Service price badge (e.g. "From $18/m²") -------------------- */
-/* Sits below the round POPULAR sticker on cards that have both, or
-   top-right alone on cards without a service-tag. Pill shape, brand navy. */
-.service-card .service-price-badge {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  background: var(--brand);
-  color: var(--white);
-  font-family: 'Saira Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 0.78rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 6px 12px;
-  border-radius: 999px;
-  box-shadow: 0 4px 10px rgba(9,39,104,0.18);
-  z-index: 4;
-  white-space: nowrap;
-  transition: transform var(--t) var(--ease);
-}
-.service-card:hover .service-price-badge {
-  transform: translateY(-2px);
-}
-
 .services-cta-block {
   text-align: center;
   margin-top: 40px;
@@ -1626,15 +1591,6 @@ section { padding: var(--section-py) 0; }
   text-align: center;
   margin-top: auto;
 }
-.review-divider {
-  display: block;
-  width: 60px;
-  height: 1px;
-  background: var(--accent);
-  align-self: flex-end;
-  margin-top: 8px;
-}
-
 .reviews-arrow {
   position: absolute;
   top: 50%;
@@ -2808,3 +2764,184 @@ details.areas-col ul li::before {
   .sticky-creds { display: none; }
 }
 
+/* ================================================================
+   TASSIE ROOF PAINTING · v2 additions
+   Placeholder blocks, Watch section, gold review stars, modal redesign
+   ================================================================ */
+
+/* --- Placeholder blocks (image stand-ins) --- */
+.placeholder-block {
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  background: linear-gradient(135deg, var(--brand-deep), var(--brand));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.placeholder-block::after {
+  content: "PHOTO COMING SOON";
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+}
+.placeholder-block.placeholder-before {
+  background: linear-gradient(135deg, #1a2a4f, #2a3a5f);
+}
+.placeholder-block.placeholder-after {
+  background: linear-gradient(135deg, var(--brand), var(--accent));
+}
+.placeholder-block.placeholder-before::after { content: "BEFORE PHOTO COMING SOON"; }
+.placeholder-block.placeholder-after::after  { content: "AFTER PHOTO COMING SOON"; }
+
+/* Hero with no image */
+.hero { background: linear-gradient(135deg, var(--brand-deep), var(--brand)); }
+.hero-bg-desktop, .hero-bg-mobile { display: none !important; }
+
+/* Watch a Job section */
+.watch-section .watch-video {
+  max-width: 960px;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.watch-section .watch-video video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.watch-section .watch-cta {
+  margin-top: 32px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Lock review stars to gold so palette swap doesn't recolour them */
+.review-stars svg { fill: #FBBF24 !important; }
+
+/* --- MODAL + LEAD POPUP REDESIGN ---
+   Override the dark theme — light card, branded fields, logo at top */
+.modal-card,
+.lead-popup-card {
+  background: var(--white) !important;
+  color: var(--ink) !important;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 32px 28px;
+}
+.modal-logo,
+.lead-popup-logo {
+  display: block;
+  max-width: 220px;
+  height: auto;
+  margin: 0 auto 20px;
+}
+.modal-title,
+.lead-popup-title {
+  color: var(--brand) !important;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+.modal-sub,
+.lead-popup-sub {
+  color: var(--steel) !important;
+  text-align: center;
+  display: block;
+  margin-bottom: 22px;
+}
+.modal-card .field-label,
+.lead-popup-card .field-label,
+.modal-card label .field-label,
+.lead-popup-card label .field-label {
+  color: var(--brand) !important;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+}
+.modal-card .field-help,
+.lead-popup-card .field-help {
+  color: var(--steel);
+  font-size: 0.85rem;
+}
+.modal-card input[type="text"],
+.modal-card input[type="tel"],
+.modal-card input[type="email"],
+.modal-card textarea,
+.lead-popup-card input[type="text"],
+.lead-popup-card input[type="tel"],
+.lead-popup-card input[type="email"],
+.lead-popup-card textarea {
+  background: var(--paper) !important;
+  border: 1px solid var(--line) !important;
+  color: var(--ink) !important;
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
+}
+.modal-card input:focus,
+.modal-card textarea:focus,
+.lead-popup-card input:focus,
+.lead-popup-card textarea:focus {
+  outline: none;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(25,118,210,0.15) !important;
+}
+.modal-card .file-dropzone,
+.lead-popup-card .file-dropzone {
+  background: var(--paper) !important;
+  border: 1.5px dashed var(--line) !important;
+  color: var(--steel) !important;
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--t) var(--ease), background var(--t) var(--ease);
+}
+.modal-card .file-dropzone:hover,
+.lead-popup-card .file-dropzone:hover {
+  border-color: var(--accent) !important;
+  background: #FAFAF6 !important;
+}
+.modal-card .form-submit,
+.lead-popup-card .form-submit {
+  background: var(--brand) !important;
+  color: var(--white) !important;
+  width: 100%;
+  padding: 14px 24px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: var(--radius);
+  margin-top: 8px;
+  transition: background var(--t) var(--ease);
+}
+.modal-card .form-submit:hover,
+.lead-popup-card .form-submit:hover {
+  background: var(--brand-deep) !important;
+}
+.modal-card .form-note,
+.lead-popup-card .form-note {
+  color: var(--concrete);
+  text-align: center;
+  font-size: 0.85rem;
+  margin-top: 12px;
+}
+.modal-close,
+.lead-popup-close {
+  color: var(--ink) !important;
+}
