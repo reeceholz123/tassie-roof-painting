@@ -3915,3 +3915,34 @@ section .phone-pill,
     flex-shrink: 0 !important;
   }
 }
+
+/* === ROUND 7: Why Choose Us mobile auto-rotating carousel === */
+@media (max-width: 720px) {
+  #why .services-grid {
+    display: flex !important;
+    grid-template-columns: none !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+    gap: 12px !important;
+    padding: 4px 16px 16px !important;
+    margin: 0 -16px !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  #why .services-grid::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  #why .service-card {
+    flex: 0 0 calc(100% - 48px) !important;
+    max-width: 340px !important;
+    min-width: 240px !important;
+    scroll-snap-align: center !important;
+    scroll-snap-stop: always !important;
+  }
+}
+/* Desktop unchanged — keeps 4-card grid layout */
