@@ -3651,3 +3651,144 @@ input[type="submit"].btn,
     flex-wrap: nowrap !important;
   }
 }
+
+/* ============================================================
+   FINAL ROUND 7 CSS — header mobile CTA hidden, sticky CTA
+   redesigned 50/50 black+blue, all buttons truly uniform.
+   Placed at end of file with high specificity + !important
+   to defeat every prior override.
+   ============================================================ */
+
+/* 1. HIDE the header "Get a Quote" button on MOBILE only */
+@media (max-width: 720px) {
+  header .btn-primary,
+  .site-header .btn-primary,
+  header [data-open-quote],
+  .header [data-open-quote],
+  nav .btn-primary,
+  .nav-actions .btn-primary,
+  .header-actions .btn-primary,
+  .header-cta {
+    display: none !important;
+  }
+}
+
+/* 2. STICKY CTA — 50/50, black left + blue right, no borders, white text */
+.sticky-cta,
+div.sticky-cta {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 8px !important;
+  padding: 10px 12px !important;
+  align-items: stretch !important;
+  justify-content: stretch !important;
+}
+.sticky-cta > a,
+.sticky-cta > button,
+.sticky-cta .btn,
+.sticky-cta a.btn,
+.sticky-cta button.btn {
+  flex: 1 1 50% !important;
+  width: 50% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  border: none !important;
+  border-color: transparent !important;
+  border-radius: 6px !important;
+  padding: 14px 16px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  min-height: 48px !important;
+  box-sizing: border-box !important;
+}
+/* Left button (Call Us) — solid black, white text, phone icon */
+.sticky-cta a[href^="tel"],
+.sticky-cta a.btn-outline-light,
+.sticky-cta a.btn-outline-dark {
+  background: #0a0a0a !important;
+  color: #ffffff !important;
+}
+.sticky-cta a[href^="tel"] svg,
+.sticky-cta a.btn-outline-light svg {
+  fill: #ffffff !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+}
+/* Right button (Get a Free Quote) — solid blue, white text, arrow icon */
+.sticky-cta button.btn-primary,
+.sticky-cta button[data-open-quote] {
+  background: var(--accent, #1A3A7A) !important;
+  color: #ffffff !important;
+}
+.sticky-cta button.btn-primary svg,
+.sticky-cta button[data-open-quote] svg {
+  fill: #ffffff !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+}
+
+/* 3. UNIVERSAL BUTTON UNIFORMITY — every button on the site, same shape */
+.btn,
+button.btn,
+a.btn,
+input[type="submit"].btn,
+input[type="button"].btn,
+.cta-button,
+.lead-popup .btn,
+.lead-popup button,
+.lead-popup-cta,
+.modal .btn,
+.modal button,
+.quote-form button,
+.quote-form input[type="submit"],
+.watch-section .watch-cta .btn,
+.watch-cta .btn,
+.hero-bottom-bar .btn,
+.hero-ctas .btn,
+.areas .btn,
+section.areas .btn,
+header .btn,
+.site-header .btn {
+  border-radius: 6px !important;
+  padding: 12px 26px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  line-height: 1.2 !important;
+  min-height: 44px !important;
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  border-width: 2px !important;
+  box-sizing: border-box !important;
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  width: auto !important;
+}
+
+/* Sticky CTA overrides the universal sizing — re-assert its rules win */
+.sticky-cta .btn,
+.sticky-cta a.btn,
+.sticky-cta button.btn {
+  flex: 1 1 50% !important;
+  width: 50% !important;
+  border-radius: 6px !important;
+  padding: 14px 16px !important;
+  min-height: 48px !important;
+}
