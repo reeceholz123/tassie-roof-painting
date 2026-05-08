@@ -3470,39 +3470,21 @@ input[type="submit"].btn,
   }
 }
 
-/* === ROUND 6 PHASE 4 === mobile parity — same content & order as desktop */
+/* === ROUND 6 PHASE 4 (REPLACED) === gentle mobile parity — only collapse multi-column grids */
 @media (max-width: 720px) {
-  /* All multi-column grids collapse to single column */
   .services-grid,
-  .why-grid,
-  .process-cards,
-  .process-grid,
   .reviews-grid,
   .areas-grid,
-  .footer-grid,
   .colour-grid,
   .featured-job-grid {
     grid-template-columns: 1fr !important;
   }
-  /* Gallery stays 2 columns on mobile for visual interest */
-  .gallery-grid {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 8px !important;
-  }
-  /* Section reveal animations not delayed on mobile */
   .reveal {
     opacity: 1 !important;
     transform: none !important;
   }
-  /* Force visibility on every content section in case something is hiding them */
-  section,
-  .section {
-    visibility: visible !important;
-    opacity: 1 !important;
-    height: auto !important;
-  }
 }
-/* Re-confirm intentionally desktop-only — DO NOT show on mobile */
+/* Hero buttons stay desktop-only */
 @media (max-width: 720px) {
   .hero-bottom-bar,
   .hero-ctas {
