@@ -3399,3 +3399,113 @@ section[class*="section-"] {
     -webkit-backdrop-filter: none !important;
   }
 }
+
+/* === ROUND 6 PHASE 1 === watch-section CTAs equal width */
+.watch-section .watch-cta,
+.watch-cta {
+  display: flex !important;
+  gap: 14px !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  flex-wrap: wrap !important;
+}
+.watch-section .watch-cta .btn,
+.watch-cta .btn {
+  flex: 0 1 260px !important;
+  min-width: 240px !important;
+  max-width: 280px !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+@media (max-width: 720px) {
+  .watch-section .watch-cta .btn,
+  .watch-cta .btn {
+    flex: 1 1 100% !important;
+    max-width: 320px !important;
+  }
+}
+
+/* === ROUND 6 PHASE 2 === every button matches header GET A QUOTE geometry */
+.btn,
+button.btn,
+a.btn,
+input[type="submit"].btn,
+.cta-button,
+.lead-popup .btn,
+.modal .btn,
+.quote-form button,
+.quote-form input[type="submit"],
+.sticky-mobile-cta .btn,
+.sticky-mobile-cta a.btn {
+  border-radius: 6px !important;
+  padding: 12px 26px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  line-height: 1.2 !important;
+  min-height: 44px !important;
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  border-width: 2px !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s ease !important;
+}
+/* Sticky mobile CTA — tighter padding so two buttons fit side-by-side */
+.sticky-mobile-cta .btn,
+.sticky-mobile-cta a.btn {
+  flex: 1 1 50% !important;
+  font-size: 0.78rem !important;
+  padding: 14px 14px !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* === ROUND 6 PHASE 3 === desktop hero text starts immediately below header bar */
+@media (min-width: 720px) {
+  .hero-content {
+    padding-top: 100px !important;
+  }
+}
+
+/* === ROUND 6 PHASE 4 === mobile parity — same content & order as desktop */
+@media (max-width: 720px) {
+  /* All multi-column grids collapse to single column */
+  .services-grid,
+  .why-grid,
+  .process-cards,
+  .process-grid,
+  .reviews-grid,
+  .areas-grid,
+  .footer-grid,
+  .colour-grid,
+  .featured-job-grid {
+    grid-template-columns: 1fr !important;
+  }
+  /* Gallery stays 2 columns on mobile for visual interest */
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+  /* Section reveal animations not delayed on mobile */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  /* Force visibility on every content section in case something is hiding them */
+  section,
+  .section {
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+  }
+}
+/* Re-confirm intentionally desktop-only — DO NOT show on mobile */
+@media (max-width: 720px) {
+  .hero-bottom-bar,
+  .hero-ctas {
+    display: none !important;
+  }
+}
