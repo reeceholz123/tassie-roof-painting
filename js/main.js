@@ -780,3 +780,86 @@
   })();
 
 })();
+
+/* ===== Why Choose Us auto-rotate on mobile ===== */
+(function whyAutoRotate() {
+  const section = document.getElementById('why');
+  if (!section) return;
+
+  const grid = section.querySelector('.services-grid');
+  if (!grid) return;
+
+  const cards = grid.querySelectorAll('.service-card');
+  if (cards.length < 2) return;
+
+  let currentIndex = 0;
+  let intervalId = null;
+  let pausedUntil = 0;
+  const ADVANCE_MS = 4000;
+
+  function isMobile() {
+    return window.innerWidth <= 720;
+  }
+
+  function advance() {
+    if (!isMobile()) return;
+    if (Date.now() < pausedUntil) return;
+    currentIndex = (currentIndex + 1) % cards.length;
+    const target = cards[currentIndex];
+    grid.scrollTo({
+      left: target.offsetLeft - grid.offsetLeft,
+      behavior: 'smooth'
+    });
+  }
+
+  function start() {
+    if (intervalId) return;
+    if (!isMobile()) return;
+    intervalId = setInterval(advance, ADVANCE_MS);
+  }
+
+  function stop() {
+    if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+  }
+
+  function pause(durationMs) {
+    pausedUntil = Date.now() + durationMs;
+  }
+
+  // Pause auto-rotation when user touches or scrolls the carousel
+  grid.addEventListener('touchstart', () => pause(8000), { passive: true });
+  grid.addEventListener('scroll', () => pause(5000), { passive: true });
+
+  // Only run when the section is actually visible
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && isMobile()) {
+          start();
+        } else {
+          stop();
+        }
+      });
+    }, { threshold: 0.2 });
+    observer.observe(section);
+  } else if (isMobile()) {
+    start();
+  }
+
+  // Reset on resize across the breakpoint
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (isMobile()) {
+        start();
+      } else {
+        stop();
+        grid.scrollLeft = 0;
+      }
+    }, 200);
+  });
+})();
