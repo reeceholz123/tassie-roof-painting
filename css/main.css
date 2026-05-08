@@ -2799,7 +2799,6 @@ details.areas-col ul li::before {
 
 /* Hero with no image */
 .hero { background: linear-gradient(135deg, var(--brand-deep), var(--brand)); }
-.hero-bg-desktop, .hero-bg-mobile { display: none !important; }
 
 /* Watch a Job section */
 .watch-section .watch-video {
@@ -2944,4 +2943,109 @@ details.areas-col ul li::before {
 .modal-close,
 .lead-popup-close {
   color: var(--ink) !important;
+}
+
+/* ================================================================
+   TASSIE ROOF PAINTING · Round 2 additions
+   Hero scrim + mobile photo, mobile services carousel + dots
+   ================================================================ */
+
+/* --- Hero with restored desktop image --- */
+.hero { background: var(--ink); }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(9, 39, 104, 0.45) 0%,
+    rgba(9, 39, 104, 0.18) 38%,
+    rgba(9, 39, 104, 0.10) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.hero .hero-content,
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+.hero-headline,
+.hero-eyebrow,
+.hero-sub,
+.hero-trust {
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.40);
+}
+
+/* --- Mobile-only hero photo (sits below text in flow) --- */
+.hero-photo-mobile { display: none; }
+
+@media (max-width: 720px) {
+  .hero { background: linear-gradient(135deg, var(--brand-deep), var(--brand)); }
+  .hero::before { display: none; }
+  .hero-bg-desktop { display: none; }
+  .hero-photo-mobile {
+    display: block;
+    width: 100vw;
+    max-width: 100vw;
+    height: auto;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    margin-top: 24px;
+    margin-bottom: 0;
+    vertical-align: top;
+  }
+  .hero-headline,
+  .hero-eyebrow,
+  .hero-sub,
+  .hero-trust { text-shadow: none; }
+}
+
+/* --- Mobile services carousel (≤720px) --- */
+.services-dots { display: none; }
+
+@media (max-width: 720px) {
+  .services-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    grid-template-columns: none !important;
+    gap: 16px !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 4px 0 16px;
+  }
+  .services-grid::-webkit-scrollbar { display: none; }
+  .services-grid .service-card {
+    flex: 0 0 calc(50% - 8px);
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+  .services-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+    padding: 0;
+  }
+  .services-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 200ms ease, width 200ms ease, border-radius 200ms ease;
+  }
+  .services-dot.is-active {
+    background: var(--accent);
+    width: 22px;
+    border-radius: 4px;
+  }
+  .services-dot:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 }

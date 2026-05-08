@@ -664,4 +664,119 @@
     io.observe(hero);
   })();
 
+  /* ----------------------------------------------------------
+     Lazy-start the "Watch a job" video so it begins from t=0
+     when the visitor first scrolls to it, not mid-loop.
+  ---------------------------------------------------------- */
+  (function watchVideoLazyStart() {
+    const video = document.querySelector('.watch-section .watch-video video');
+    if (!video || !('IntersectionObserver' in window)) return;
+    video.pause();
+    video.currentTime = 0;
+    let hasPlayed = false;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !hasPlayed) {
+          video.currentTime = 0;
+          const p = video.play();
+          if (p !== undefined) p.catch(() => { /* autoplay blocked; controls allow manual start */ });
+          hasPlayed = true;
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    obs.observe(video);
+  })();
+
+  /* ----------------------------------------------------------
+     Mobile services carousel — auto-rotate, pause on touch,
+     resume after 6s. Respects prefers-reduced-motion.
+  ---------------------------------------------------------- */
+  (function servicesCarousel() {
+    const grid = document.querySelector('.services-grid');
+    const dotsRoot = document.querySelector('[data-services-dots]');
+    if (!grid || !dotsRoot) return;
+    const dots = Array.from(dotsRoot.querySelectorAll('.services-dot'));
+    if (dots.length === 0) return;
+
+    const reducedMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mobileMQ = window.matchMedia('(max-width: 720px)');
+    const totalPages = 3;
+    let currentPage = 0;
+    let autoTimer = null;
+    let resumeTimer = null;
+    let paused = false;
+    let observer = null;
+
+    function setActiveDot(page) {
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === page));
+    }
+    function goToPage(page) {
+      currentPage = ((page % totalPages) + totalPages) % totalPages;
+      grid.scrollTo({ left: currentPage * grid.clientWidth, behavior: 'smooth' });
+      setActiveDot(currentPage);
+    }
+    function startAuto() {
+      stopAuto();
+      if (reducedMotionMQ.matches) return;
+      autoTimer = setInterval(() => {
+        if (!paused) goToPage(currentPage + 1);
+      }, 4000);
+    }
+    function stopAuto() {
+      if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+    }
+    function pauseTemporarily() {
+      paused = true;
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => { paused = false; }, 6000);
+    }
+
+    grid.addEventListener('touchstart', pauseTemporarily, { passive: true });
+    grid.addEventListener('pointerdown', pauseTemporarily, { passive: true });
+
+    let scrollSyncTimer = null;
+    grid.addEventListener('scroll', () => {
+      if (scrollSyncTimer) clearTimeout(scrollSyncTimer);
+      scrollSyncTimer = setTimeout(() => {
+        const w = grid.clientWidth || 1;
+        const page = Math.round(grid.scrollLeft / w);
+        if (page !== currentPage && page >= 0 && page < totalPages) {
+          currentPage = page;
+          setActiveDot(currentPage);
+        }
+      }, 120);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        pauseTemporarily();
+        goToPage(i);
+      });
+    });
+
+    function applyMode() {
+      stopAuto();
+      if (mobileMQ.matches) {
+        if (!observer && 'IntersectionObserver' in window) {
+          observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) startAuto();
+              else stopAuto();
+            });
+          }, { threshold: 0.3 });
+          observer.observe(grid);
+        }
+      } else {
+        if (observer) { observer.disconnect(); observer = null; }
+        grid.scrollLeft = 0;
+        setActiveDot(0);
+        currentPage = 0;
+      }
+    }
+    applyMode();
+    if (mobileMQ.addEventListener) mobileMQ.addEventListener('change', applyMode);
+    else if (mobileMQ.addListener) mobileMQ.addListener(applyMode);
+  })();
+
 })();
